@@ -22,14 +22,7 @@
                 align="center"
                 justify="center"
         >
-          <v-col class="shrink">
-            <v-tooltip right>
-              <template v-slot:activator="{ on }">
-                <Home></Home>
-              </template>
-              <span>Source</span>
-            </v-tooltip>
-          </v-col>
+          <router-view></router-view>
         </v-row>
       </v-container>
     </v-main>

@@ -13,7 +13,7 @@ Vue.use(VueRouter)
   {
     path: '/kits',
     name: 'Kits',
-    component: () => import(/* webpackChunkName: "kits" */ '../views/Kits.vue')
+    component: () => import('../views/Kits.vue')
   }
 ]
 

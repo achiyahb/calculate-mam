@@ -23,6 +23,9 @@
                         <v-container fluid>
                             <v-row>
                                     <v-combobox
+                                            item-text="name"
+                                            single-line
+                                            return-object
                                             v-model="select"
                                             :items="props"
                                             label="אביזרים נלווים"
@@ -86,8 +89,7 @@
                 kitName: '',
 
                 select: [],
-                props: [
-                ],
+                props: [],
             propQuantity: null,
             headers: {
                 0:    {
@@ -107,13 +109,15 @@
                  props: {}
              }
              for (let p of this.prop){
-                 theKit.props[p.itemName] = p.quantity
+                 theKit.props[p.itemName] = {}
+                 theKit.props[p.itemName].quantity = p.quantity
+                 theKit.props[p.itemName].id = p.id
 
              }
              firebaseApi.insertKit(theKit)
             },
             addItem(select,propQuantity) {
-                const item = {itemName:`${select}`,quantity:`${propQuantity}`}
+                const item = {itemName:`${select.name}`,quantity:`${propQuantity}`,id:`${select.key}`}
                 this.prop.push(item)
                 this.clearField()
             },
@@ -127,8 +131,11 @@
            let propsObj = firebaseApi.readPropsData()
             .then(result => {
                 propsObj = result
-                for (let prop in propsObj){
-                     self.props.push(propsObj[prop].propName)
+                for (let prop1 in propsObj){
+                   let prop ={}
+                    prop.name = propsObj[prop1].propName
+                    prop.key = prop1
+                     self.props.push(prop)
                 }
             })
         }

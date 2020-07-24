@@ -52,9 +52,6 @@
 <script>
     import firebaseApi from "../middelware/firebaseApi";
 
-
-    const tableName = "courseDetails"
-
     export default {
         name: 'NewProp',
 

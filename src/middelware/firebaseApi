@@ -5,7 +5,8 @@ export default {
     readKitsData,
     readPropsData,
     insertKit,
-    insertProp
+    insertProp,
+    deletePropsData
 }
 
 function readData(path){
@@ -19,6 +20,10 @@ function writeToData(path, data) {
     firebaseInstance.firebase.database().ref(path).push(data)
 }
 
+function deleteData(path) {
+    firebaseInstance.firebase.database().ref(path).set(null)
+}
+
 function insertKit(data) {
     const path = "kits"
     writeToData(path,data)
@@ -30,10 +35,16 @@ function insertProp(data) {
 }
 
 function readKitsData() {
-
+    const path = "kits"
+    return readData(path)
 }
 
 function readPropsData() {
     const path = "props"
     return readData(path)
+}
+
+function deletePropsData(key){
+    const path =`props/${key}`
+    deleteData(path)
 }

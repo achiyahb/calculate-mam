@@ -37,6 +37,7 @@
         <v-list-item link>
           <v-list-item-action>
             <v-icon>mdi-view-dashboard</v-icon>
+            <v-icon>mdi-view-dashboard</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>דף הבית</v-list-item-title>
@@ -49,9 +50,19 @@
             <v-icon>mdi-cog</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>קיטים</v-list-item-title>
+            <v-list-item-title>עריכת הקיטים והאביזרים</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        </router-link>
+        <router-link to="/calculator">
+          <v-list-item link>
+            <v-list-item-action>
+              <v-icon>mdi-cog</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>מחשבון אביזרים נלווים</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
         </router-link>
       </v-list>
     </v-navigation-drawer>

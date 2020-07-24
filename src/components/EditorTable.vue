@@ -29,19 +29,11 @@
 
 <script>
 
-    import firebaseApi from "../middelware/firebaseApi";
-    import firebase from 'firebase/app'
-    import 'firebase/database'
-    import firebaseInstance from '../middelware/firebase';
-    import database from 'firebase/database'
-    import router from "../router";
-
-    const db = firebaseInstance.firebase.database();
     export default {
-        name: "GenericTable",
+        name: "EditorTable",
         props: ['headers','prop'],
         data: () => ({
-            items: []
+            item: []
         }),
         methods:{
             deleteItem(key){
@@ -50,12 +42,7 @@
             },
         },
         created() {
-            // const self = this;
-            // const path = firebaseApi.pathFactory(this.data.pathNum, self)
-            // this.items = firebaseApi.getData(path)
-            //     .then(result => {
-            //         self.items = result
-            //     })
+
         },
 
     }

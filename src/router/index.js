@@ -24,6 +24,11 @@ Vue.use(VueRouter)
       path: '/kits/new-prop',
       name: 'NewProp',
       component: () => import('../views/NewProp.vue')
+    },
+    {
+      path: '/calculator',
+      name: 'calculator',
+      component: () => import('../views/Calculator.vue')
     }
 
 ]

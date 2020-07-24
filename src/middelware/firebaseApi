@@ -1,0 +1,39 @@
+import firebase from "firebase";
+import firebaseInstance from './firebase'
+
+export default {
+    readKitsData,
+    readPropsData,
+    insertKit,
+    insertProp
+}
+
+function readData(path){
+    return firebaseInstance.firebase.database().ref(path).once('value')
+        .then(res => {
+            return res.val();
+        })
+}
+
+function writeToData(path, data) {
+    firebaseInstance.firebase.database().ref(path).push(data)
+}
+
+function insertKit(data) {
+    const path = "kits"
+    writeToData(path,data)
+}
+
+function insertProp(data) {
+    const path = "props"
+    writeToData(path,data)
+}
+
+function readKitsData() {
+
+}
+
+function readPropsData() {
+    const path = "props"
+    return readData(path)
+}

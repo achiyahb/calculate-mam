@@ -9,7 +9,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="(item,key) in items" v-if="item" :key="item .name">
+                <tr v-for="(item,key) in items" v-if="item" >
                     <td v-for="header in headers" :class="{one: header.style}" @click="editChild(key)">
                         {{item[header.value]}}
                     </td>
@@ -29,6 +29,7 @@
 
 <script>
     import firebaseApi from "../middelware/firebaseApi";
+    import router from "../router"
 
     export default {
         name: "GenericTable",
@@ -38,16 +39,18 @@
         }),
         methods:{
             deleteItem(key){
-                firebaseApi.deletePropsData(key)
+                if(this.headers[0].value === 'kitName'){
+                    firebaseApi.deleteKitsData(key)
+                }else{
+                    firebaseApi.deletePropsData(key)
+                }
                 return this.items[key]= undefined
             },
             editChild(key){
-                if(this.$route.params.chaid){
-                    router.push({ path: `/courses/${this.$route.params.cid}/chapters/${this.$route.params.chaid}/questions/${key}`})
-                } else if (this.$route.params.cid){
-                    router.push({ path: `/courses/${this.$route.params.cid}/chapters/${key}`})
+                if(this.headers[0].value === 'kitName'){
+                    router.push({ path: `/kits/${key}`})
                 } else {
-                    router.push({ path: `/courses/${key}`})
+                    router.push({ path: `/props/${key}`})
                 }
 
             }

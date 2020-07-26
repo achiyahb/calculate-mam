@@ -21,8 +21,18 @@ Vue.use(VueRouter)
     component: () => import('../views/NewKit.vue')
   },
     {
-      path: '/kits/new-prop',
+      path: '/kits/:kitId',
+      name: 'editKit',
+      component: () => import('../views/NewKit.vue')
+    },
+    {
+      path: '/props/new-prop',
       name: 'NewProp',
+      component: () => import('../views/NewProp.vue')
+    },
+    {
+      path: '/props/:propId',
+      name: 'editProp',
       component: () => import('../views/NewProp.vue')
     },
     {

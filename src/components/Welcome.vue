@@ -6,15 +6,15 @@
                         :src="require('../assets/logo.jpg')"
                         class="rounded-circle center"
 
-                        height="180"
-                        width="180"
+                        height="150"
+                        width="150"
                 />
             </v-col>
 
             <v-col class="mb-4">
-                <h1 class="display-2 font-weight-bold mb-3">
+                <h2 class="display-1 font-weight-bold mb-3">
  ברוכים הבאים למחשבון האביזרים הנלווים
-                </h1>
+                </h2>
 
                 <p class="subheading font-weight-regular">
                 להתחלת עריכה התחבר

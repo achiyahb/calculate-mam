@@ -37,7 +37,6 @@
                         cols="12"
                         md="2"
                 >
-                    <v-btn class="mr-4" @click="calculate(select)">חשב עבורי</v-btn>
                     <v-btn class="mr-4" @click="clearField()">נקה</v-btn>
                 </v-col>
                 <v-col>
@@ -79,6 +78,9 @@
         }),
         methods: {
             chooseKit(select) {
+                if (select === null){
+                    return
+                }
                 this.kitProps = this.kitsObj[select.key].props
                 this.table = true
             },

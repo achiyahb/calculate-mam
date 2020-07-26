@@ -1,6 +1,6 @@
 <template>
     <v-form v-model="valid">
-        <h1>צור קיט חדש</h1>
+        <h1>{{this.$route.params.kitId?'ערוך קיט קיים':'צור קיט חדש'}}</h1>
         <v-container>
             <v-row>
                 <v-col
@@ -61,7 +61,8 @@
                         <v-btn class="mr-4">חזור</v-btn>
 
                     </router-link>
-                    <v-btn class="mr-4" @click="submit()">שמור</v-btn>
+                    <v-btn v-if="!$route.params.kitId" class="mr-4" @click="submit()">שמור</v-btn>
+                    <v-btn v-else class="mr-4" @click="editKit()">ערוך</v-btn>
                 </v-row>
             </v-container>
 
@@ -73,8 +74,10 @@
 <script>
     import firebaseApi from "../middelware/firebaseApi";
     import EditorTable from "../components/EditorTable";
+    import router from "../router"
 
     const tableName = "courseDetails"
+
 
     export default {
         name: 'NewKit',
@@ -124,10 +127,39 @@
             clearField(){
                 this.select = ''
                 this.propQuantity = ''
+            },
+            editKit(){
+                const self = this
+                const theKit = {
+                    kitName: this.kitName,
+                    props: {}
+                }
+                for (let p of this.prop){
+                    theKit.props[p.itemName] = {}
+                    theKit.props[p.itemName].quantity = p.quantity
+                    theKit.props[p.itemName].id = p.id
+
+                }
+                firebaseApi.updateKit(theKit, self)
             }
         },
         created() {
             const self = this
+            if (this.$route.params.kitId){
+                let kit = firebaseApi.readKitsData(self)
+                    .then(result => {
+                        kit = result
+                    self.kitName = kit.kitName
+                    let props = kit.props
+                        for (let prop in props){
+                            let item = {}
+                            item.itemName = prop
+                            item.quantity = props[prop].quantity
+                            item.id = props[prop].id
+                            self.prop.push(item)
+                        }
+                    })
+            }
            let propsObj = firebaseApi.readPropsData()
             .then(result => {
                 propsObj = result

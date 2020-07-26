@@ -5,26 +5,21 @@
                 <thead>
                 <tr>
                     <th></th>
-                    <th class="text-center" v-for="(prop,key) in kitProps">{{key}}</th>
+                    <th>כמות לקיט בודד</th>
+                    <th> כמות לפי מספר קיטים</th>
+                    <th>משקל לפי מספר הקיטים</th>
                 </tr>
                 </thead>
 
                 <tbody>
+                <tr class="text-center" v-for="(prop,key) in kitProps">
+                    <td>{{key}}</td>
+                    <td>{{prop.quantity}}</td>
+                    <td>{{prop.quantity * kitsQuantity}}</td>
+                    <td>{{prop.quantity * kitsQuantity * propsObj[prop.id].propWeight}}</td>
+                </tr>
+                <tr>
 
-                <tr>
-                    <td>כמות לקיט בודד</td>
-                    <td class="text-center" v-for="(item) in kitProps" >{{item.quantity}}
-                    </td>
-                </tr>
-                <tr>
-                    <td> כמות לפי מספר קיטים</td>
-                    <td class="text-center" v-for="(item) in kitProps" >{{item.quantity * kitsQuantity}}
-                    </td>
-                </tr>
-                <tr>
-                    <td>משקל לפי מספר הקיטים</td>
-                    <td class="text-center" v-for="(item) in kitProps" >{{propsObj[item.id].propWeight * item.quantity * kitsQuantity}}
-                    </td>
                 </tr>
                 </tbody>
             </template>

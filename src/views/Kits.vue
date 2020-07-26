@@ -7,7 +7,7 @@
     <v-row>
       <v-spacer></v-spacer>
       <router-link to="/kits/new-kit">
-        <v-btn class="mx-2" fab dark color="indigo">
+        <v-btn class="mx-2 rounded" dark color="indigo">
           <v-icon dark>fa-plus</v-icon> קיט חדש
         </v-btn>
       </router-link>
@@ -15,9 +15,9 @@
       <ItemsTable :headers="headersProps" :items="props"></ItemsTable>
     <v-row>
       <v-spacer></v-spacer>
-      <router-link to="/kits/new-prop">
-        <v-btn class="mx-2" fab dark color="indigo">
-          <v-icon dark>fa-plus</v-icon> אביזר חדש
+      <router-link to="/props/new-prop">
+        <v-btn class="mx-2 rounded "dark color="indigo">
+          <v-icon dark>fa-plus</v-icon>  אביזר חדש
         </v-btn>
       </router-link>
     </v-row>

@@ -1,6 +1,6 @@
 <template>
     <v-form v-model="valid">
-        <h1>צור אביזר חדש</h1>
+        <h1> {{$route.params.propId?'ערוך אביזר קיים':'צור אביזר חדש'}}</h1>
         <v-container>
             <v-row>
                 <v-col
@@ -40,7 +40,8 @@
                         <v-btn class="mr-4">חזור</v-btn>
 
                     </router-link>
-                    <v-btn class="mr-4" @click="submit()">שמור</v-btn>
+                    <v-btn v-if="!$route.params.propId" class="mr-4" @click="submit()">שמור</v-btn>
+                    <v-btn v-else class="mr-4" @click="editProp()">ערוך</v-btn>
                 </v-row>
             </v-container>
 
@@ -65,17 +66,25 @@
         }),
         methods: {
             submit() {
-                console.log(this.prop)
-             firebaseApi.insertProp(this.prop)
+                const prop =this.prop
+             firebaseApi.insertProp(prop)
             },
             clearField(){
                 this.prop.propName = ''
                 this.prop.propWeight = ''
+            },
+            editProp(){
+                const self =this
+                firebaseApi.updateProp(this.prop, self)
             }
         },
         created() {
-            if (this.course){
-                this.item = this.course;
+            const self = this
+            if (this.$route.params.propId) {
+                this.prop = firebaseApi.readPropsData(self)
+                    .then(result => {
+                        self.prop = result
+                    })
             }
         }
     }

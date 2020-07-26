@@ -6,7 +6,10 @@ export default {
     readPropsData,
     insertKit,
     insertProp,
-    deletePropsData
+    updateKit,
+    updateProp,
+    deletePropsData,
+    deleteKitsData
 }
 
 function readData(path){
@@ -24,6 +27,10 @@ function deleteData(path) {
     firebaseInstance.firebase.database().ref(path).set(null)
 }
 
+function  updateData(path,data) {
+    firebaseInstance.firebase.database().ref(path).set(data)
+}
+
 function insertKit(data) {
     const path = "kits"
     writeToData(path,data)
@@ -34,17 +41,38 @@ function insertProp(data) {
     writeToData(path,data)
 }
 
-function readKitsData() {
-    const path = "kits"
+function readKitsData(self) {
+    if (self){
+        var path = `kits/${self.$route.params.kitId}`
+    } else {
+        var path = "kits"
+    }
     return readData(path)
 }
 
-function readPropsData() {
-    const path = "props"
+function readPropsData(self) {
+    if (self) {
+        var path = `props/${self.$route.params.propId}`
+    } else {
+        var path = "props"
+    }
     return readData(path)
 }
 
-function deletePropsData(key){
-    const path =`props/${key}`
-    deleteData(path)
+    function deletePropsData(key) {
+        const path = `props/${key}`
+        deleteData(path)
+    }
+    function deleteKitsData(key) {
+        const path = `kits/${key}`
+        deleteData(path)
+    }
+
+    function updateKit(data, self) {
+        const path = `kits/${self.$route.params.kitId}`
+        updateData(path,data)
+    }
+function updateProp(data, self) {
+    const path = `props/${self.$route.params.propId}`
+    updateData(path,data)
 }
